@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import Menu from './Menu';
+import Logo from './Logo';
 
 const Side = Layout.Sider;
 function Sider() {
@@ -22,6 +23,7 @@ function Sider() {
         overflow: 'auto',
       }}
     >
+      <Logo />
       <Menu></Menu>
     </Side>
   );
