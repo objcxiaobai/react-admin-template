@@ -11,8 +11,8 @@ function Sider() {
    */
   return (
     <Side
-      collapsible={true}
-      collapsed={true}
+      collapsible={false}
+      collapsed={false}
       trigger={null}
       style={{
         zIndex: '10',
