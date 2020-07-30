@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, message } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { actionCreators } from './store';
 import './index.css';
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleError = this.handleError.bind(this);
   }
@@ -56,8 +59,10 @@ class Login extends Component {
   handleSubmit(event) {
     console.log(event);
     const { username, password } = event;
-    if (username == 'xb' && password == '123') {
+    if (username === 'xb' && password === '123') {
       message.success('登录成功');
+      this.props.setToken(username);
+      this.props.history.push('/dashboard');
     } else {
       message.error('账号密码错误');
     }
@@ -67,4 +72,14 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapState = (state) => ({
+  token: state.login.token,
+});
+
+const mapDispatch = (dispatch) => ({
+  setToken(token) {
+    dispatch(actionCreators.setToken(token));
+  },
+});
+
+export default connect(mapState, mapDispatch)(withRouter(Login));
