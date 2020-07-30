@@ -4,7 +4,7 @@ import { Layout, Dropdown, Menu, Avatar } from 'antd';
 import './index.css';
 import duoduo from '../../../assets/images/duoduo.jpg';
 import { CaretDownOutlined } from '@ant-design/icons';
-
+import Hamburger from '../../../components/Hamburger';
 const { Header } = Layout;
 
 class LayoutHeader extends Component {
@@ -21,6 +21,7 @@ class LayoutHeader extends Component {
     return (
       <>
         <Header>
+          <Hamburger />
           <div className="right-menu">
             <div className="dropdown-wrap">
               <Dropdown overlay={menu}>
