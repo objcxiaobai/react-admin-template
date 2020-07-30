@@ -6,9 +6,13 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case constants.CHANGE_TOKEN:
-      const tempState = { ...defaultState };
+      const tempState = { ...state };
       tempState.token = action.token;
       return tempState;
+    case constants.LOGIN_OUT:
+      const temp = { ...state };
+      temp.token = '';
+      return temp;
     default:
       return state;
   }

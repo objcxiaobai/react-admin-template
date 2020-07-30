@@ -35,3 +35,9 @@
   vertical-align: bottom;
   padding: 0 0 12px 6px;
 }
+
+.fix-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+}

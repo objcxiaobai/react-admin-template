@@ -2,9 +2,10 @@ import React from 'react';
 import { Layout } from 'antd';
 import Menu from './Menu';
 import Logo from './Logo';
-
+import { connect } from 'react-redux';
 const Side = Layout.Sider;
-function Sider() {
+function Sider(props) {
+  const { status } = props;
   /**
    * collapsible 当前收起状态
    * collapsed 是否可收起
@@ -12,15 +13,11 @@ function Sider() {
    */
   return (
     <Side
-      collapsible={false}
-      collapsed={false}
+      collapsible
+      collapsed={status}
       trigger={null}
       style={{
         zIndex: '10',
-        height: '100vh',
-        position: 'fixed',
-        left: 0,
-        overflow: 'auto',
       }}
     >
       <Logo />
@@ -29,4 +26,8 @@ function Sider() {
   );
 }
 
-export default Sider;
+const mapStateToProps = (state) => ({
+  status: state.layout.status,
+});
+
+export default connect(mapStateToProps, null)(Sider);

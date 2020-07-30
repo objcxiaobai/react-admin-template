@@ -8,7 +8,7 @@ function Main() {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider></Sider>
-      <Layout style={{ marginLeft: 200 }}>
+      <Layout>
         <LayoutHeader></LayoutHeader>
         <Content></Content>
       </Layout>
