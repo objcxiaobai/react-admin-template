@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import menuList from '../../../../config/menuConfig';
+import { connect } from 'react-redux';
 import {
   HomeOutlined,
   FileSearchOutlined,
   LockOutlined,
 } from '@ant-design/icons';
+import { actionCreators } from '../../store';
+import { getMenuItemInMenuListByProperty } from '../../../../utils/utils';
 
 const Icons = {
   HomeOutlined: <HomeOutlined />,
@@ -19,6 +22,7 @@ const SubMenu = Menu.SubMenu;
 class Meun extends Component {
   state = {
     collapsed: false,
+    openKey: [],
   };
   toggleCollapsed = () => {
     this.setState({
@@ -26,10 +30,28 @@ class Meun extends Component {
     });
   };
 
+  handleMenuSelect = ({ key = '/dashboard' }) => {
+    let menuItem = getMenuItemInMenuListByProperty(menuList, 'path', key);
+    if (!this.state.openKey.includes(key)) {
+      this.state.openKey.push(key);
+    }
+    this.props.addTag(menuItem);
+  };
+
+  componentDidMount() {
+    this.handleMenuSelect({ key: '/dashboard' });
+  }
+
   render() {
+    const openKey = this.state.openKey;
     return (
       <div style={{ width: 200 }}>
-        <Menu defaultSelectedKeys={['dashboard']} mode="inline" theme="dark">
+        <Menu
+          defaultSelectedKeys={openKey}
+          onSelect={this.handleMenuSelect}
+          mode="inline"
+          theme="dark"
+        >
           {menuList.map((item) => {
             const myIcon = Icons[item.icon];
             const isChildren = item.children ? true : false;
@@ -60,4 +82,10 @@ class Meun extends Component {
   }
 }
 
-export default Meun;
+const mapToDispatchProp = (dispatch) => ({
+  addTag(tag) {
+    dispatch(actionCreators.addTag(tag));
+  },
+});
+
+export default connect(null, mapToDispatchProp)(Meun);
