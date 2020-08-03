@@ -23,7 +23,7 @@ class TagList extends Component {
     return (
       <ul className="tags-wrap">
         {tagList.map((item) => (
-          <li key={item.key}>
+          <li key={item.path}>
             <Tag
               closable={item.path !== '/dashboard'}
               color={currentPath === item.path ? 'geekblue' : 'gold'}

@@ -32,11 +32,14 @@ class Meun extends Component {
 
   handleMenuSelect = ({ key = '/dashboard' }) => {
     let menuItem = getMenuItemInMenuListByProperty(menuList, 'path', key);
+    if (!this.state.openKey.includes(key)) {
+      this.state.openKey.push(key);
+    }
     this.props.addTag(menuItem);
   };
 
-  componentWillMount() {
-    this.handleMenuSelect(this.state.openKey);
+  componentDidMount() {
+    this.handleMenuSelect({ key: '/dashboard' });
   }
 
   render() {

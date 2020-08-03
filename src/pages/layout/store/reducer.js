@@ -12,7 +12,11 @@ export default (state = defaultStates, action) => {
       return tempState;
     case constants.ADD_TAGS:
       const temp = { ...state };
-      temp.tagList = [...temp.tagList, action.tag];
+      if (temp.tagList.includes(action.tag)) {
+        return temp;
+      } else {
+        temp.tagList = [...temp.tagList, action.tag];
+      }
       return temp;
     case constants.DELETE_TAGS:
       const deleteTemp = { ...state };
