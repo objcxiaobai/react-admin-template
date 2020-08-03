@@ -50,6 +50,9 @@ class LayoutHeader extends Component {
       case 'outLogin':
         this.props.loginOut();
         break;
+      default:
+        console.log('这是默认');
+        break;
     }
   }
 }

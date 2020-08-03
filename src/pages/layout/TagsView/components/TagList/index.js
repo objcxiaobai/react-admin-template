@@ -4,22 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../../store';
 class TagList extends Component {
-  state = {
-    left: 0,
-    top: 0,
-    menuVisible: false,
-  };
-
-  constructor(props) {
-    super(props);
-    // this.handleClose = this.handleClose.bind(this);
-  }
-
   render() {
     const { tagList, history } = this.props;
     const currentPath = history.location.pathname;
-    console.log(this.props);
-    console.log(tagList);
     return (
       <ul className="tags-wrap">
         {tagList.map((item) => (
@@ -68,9 +55,6 @@ const mapStateToProp = (state) => ({
 });
 
 const mapDispatchToProp = (dispatch) => ({
-  addTag(tag) {
-    dispatch(actionCreators.addTag(tag));
-  },
   deleteTag(tag) {
     dispatch(actionCreators.deleteTag(tag));
   },
