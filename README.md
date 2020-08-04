@@ -45,4 +45,16 @@ success:
 
 ### 0.0.4
 
-- 添加 tagView,重新了解了 class 语法糖实例属性可以不用写在构造函数中，可以与方法同级
+- 添加 TagView,重新了解了 class 语法糖实例属性可以不用写在构造函数中，可以与方法同级
+
+### 0.0.5
+
+- 构建 `TagView` 组件
+- 构建 `TagList` 子组件
+- 由 `Sider` 组件中的 `Menu` 添加 tag 标签,并使用 store 里 tagList 进行数据管理
+- `TagList` 标签 由 store 进行 tagList 渲染并添加`删除功能`
+
+### 0.0.6
+
+- layout 模块中 Content 组件 加载路由
+- 在 config 目录中 添加 routeMap 懒加载，其中 lodging 组件需要重新封装
