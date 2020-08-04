@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from '../../dashboard';
-import Documents from '../../documents';
-import Permission from '../../permission';
+import routeList from '../../../config/routeMap';
 class Content extends Component {
   render() {
     return (
       <Switch>
-        <Route component={Dashboard} path="/dashboard" key="/dashboard"></Route>
-        <Route component={Documents} path="/documents" key="/documents"></Route>
-        <Route
-          component={Permission}
-          path="/permission"
-          key="/permission"
-        ></Route>
+        {routeList.map((item) => {
+          return (
+            <Route
+              component={item.component}
+              path={item.path}
+              key={item.path}
+            ></Route>
+          );
+        })}
       </Switch>
     );
   }

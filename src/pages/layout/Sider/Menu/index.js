@@ -21,13 +21,7 @@ const SubMenu = Menu.SubMenu;
 
 class Meun extends Component {
   state = {
-    collapsed: false,
     openKey: [],
-  };
-  toggleCollapsed = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
   };
 
   handleMenuSelect = ({ key = '/dashboard' }) => {
