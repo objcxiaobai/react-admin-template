@@ -47,6 +47,8 @@ success:
 
 - 添加 TagView,重新了解了 class 语法糖实例属性可以不用写在构造函数中，可以与方法同级
 
+---
+
 ### 0.0.5
 
 - 构建 `TagView` 组件
@@ -70,3 +72,12 @@ success:
 - 添加 customize-cra react-app-rewired 模块，通过这两个修改内置 webpack,
 - 修改 package.json 文件 里 "scripts"模块
 - update package.json 文件里的插件位置
+
+---
+
+### 0.0.8
+
+- 添加路由权限和路由过滤
+- 添加 header 模块面包屑
+- 更新 Menu 模块中的 map 遍历
+- 添加了 `nprogress` 加载

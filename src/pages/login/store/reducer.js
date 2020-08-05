@@ -1,6 +1,7 @@
 import * as constants from './constants';
 const defaultState = {
   token: '',
+  role: '',
 };
 
 export default (state = defaultState, action) => {
@@ -8,6 +9,7 @@ export default (state = defaultState, action) => {
     case constants.CHANGE_TOKEN:
       const tempState = { ...state };
       tempState.token = action.token;
+      tempState.role = action.role;
       return tempState;
     case constants.LOGIN_OUT:
       const temp = { ...state };
