@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Dropdown, Menu, Avatar } from 'antd';
-import duoduo from '../../../assets/images/duoduo.jpg';
 import { CaretDownOutlined } from '@ant-design/icons';
-import Hamburger from '../../../components/Hamburger';
 import { connect } from 'react-redux';
+import duoduo from '../../../assets/images/duoduo.jpg';
+import Hamburger from '../../../components/Hamburger';
 import { actionCreators } from '../../../pages/login/store';
+import BreadCrumb from '@/components/BreadCrumb';
 import './index.css';
 const { Header } = Layout;
 
@@ -29,6 +30,7 @@ class LayoutHeader extends Component {
       <>
         <Header>
           <Hamburger />
+          <BreadCrumb />
           <div className="right-menu">
             <div className="dropdown-wrap">
               <Dropdown overlay={menu}>

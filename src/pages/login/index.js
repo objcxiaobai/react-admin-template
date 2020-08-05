@@ -61,7 +61,7 @@ class Login extends Component {
     const { username, password } = event;
     if (username === 'xb' && password === '123') {
       message.success('登录成功');
-      this.props.setToken(username);
+      this.props.setToken(username, 'admin');
       this.props.history.push('/dashboard');
     } else {
       message.error('账号密码错误');
@@ -77,8 +77,8 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  setToken(token) {
-    dispatch(actionCreators.setToken(token));
+  setToken(token, role) {
+    dispatch(actionCreators.setToken(token, role));
   },
 });
 
