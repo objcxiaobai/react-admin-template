@@ -81,3 +81,7 @@ success:
 - 添加 header 模块面包屑
 - 更新 Menu 模块中的 map 遍历
 - 添加了 `nprogress` 加载
+
+### 0.0.9
+
+- fix loading 加载一直显示的问题.

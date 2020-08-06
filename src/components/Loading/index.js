@@ -6,13 +6,13 @@ import 'nprogress/nprogress.css'; // progress bar style
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
 class Loading extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     NProgress.start();
   }
   componentDidUpdate() {
+    NProgress.done();
+  }
+  componentWillUnmount() {
     NProgress.done();
   }
 
