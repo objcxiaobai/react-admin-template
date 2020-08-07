@@ -85,3 +85,9 @@ success:
 ### 0.0.9
 
 - fix loading 加载一直显示的问题.
+
+### 0.0.10
+
+- add: `http-proxy-middleware` 中间件 跨域代理
+- update : http util
+- add: 在 documents 模块中 添加 tab 并网络请求
