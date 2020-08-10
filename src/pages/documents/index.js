@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Space, Button } from 'antd';
+import EditorModal from '@/components/EditorModal';
 import { getList } from '@/api/documents';
 import './index.css';
 class Documents extends Component {
@@ -7,6 +8,7 @@ class Documents extends Component {
     super(props);
     this.state = {
       list: [],
+      visible: false,
     };
   }
 
@@ -23,7 +25,7 @@ class Documents extends Component {
       {
         title: '操作',
         key: 'action',
-        render: (text, record, index) => {
+        render: (_, record, index) => {
           let item = record;
           let idx = index;
           return (
@@ -48,11 +50,25 @@ class Documents extends Component {
   };
 
   _handClickDelete = (record, index) => {
+    const tempList = [...this.state.list];
+    tempList.splice(index, 1);
+    this.setState({
+      list: tempList,
+    });
     console.log('删除', record, index);
   };
 
   _handClickEdit = (record, index) => {
+    this.setState((state) => ({
+      visible: !state.visible,
+    }));
     console.log('编辑', record, index);
+  };
+
+  _editorCallBack = (value) => {
+    this.setState({
+      visible: value,
+    });
   };
 
   render() {
@@ -60,14 +76,17 @@ class Documents extends Component {
 
     return (
       <>
-        <h2>大家好我是文档</h2>
-
         <div className="d-container">
           <Table
             columns={_columns}
             rowKey={(record) => record.url}
             dataSource={this.state.list}
           ></Table>
+
+          <EditorModal
+            visible={this.state.visible}
+            editorCallBack={this._editorCallBack}
+          />
         </div>
       </>
     );
