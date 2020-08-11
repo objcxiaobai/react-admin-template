@@ -1,26 +1,35 @@
 import React, { Component } from 'react';
-import { Modal } from 'antd';
+import { Modal, Form, Input } from 'antd';
 class EditorModal extends Component {
+  formRef = React.createRef();
   constructor(props) {
     super(props);
   }
 
   handlerSubmit = () => {
-    console.log('成功');
-    this.handleEditorCallBackSuper();
+    this.formRef.current
+      .validateFields()
+      .then((item) => {
+        console.log(item);
+        this.handleEditorCallBackSuper(item);
+      })
+      .catch((err) => {
+        console.log('错误', err);
+      });
   };
 
   handlerCanCle = () => {
     this.handleEditorCallBackSuper();
   };
 
-  handleEditorCallBackSuper = () => {
+  handleEditorCallBackSuper = (item) => {
     let value = this.props.visible ? false : true;
-    this.props.editorCallBack(value);
+    this.props.editorCallBack(value, item);
   };
 
   render() {
-    const { visible } = this.props;
+    const { visible, editContent } = this.props;
+    const { author, content } = editContent;
     return (
       <>
         <Modal
@@ -29,9 +38,32 @@ class EditorModal extends Component {
           onOk={this.handlerSubmit}
           onCancel={this.handlerCanCle}
         >
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
+          <Form ref={this.formRef} name="form_in_modal">
+            <Form.Item
+              label="作者"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              name="author"
+              initialValue={author}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="内容"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              name="content"
+              initialValue={content}
+            >
+              <Input.TextArea />
+            </Form.Item>
+          </Form>
         </Modal>
       </>
     );

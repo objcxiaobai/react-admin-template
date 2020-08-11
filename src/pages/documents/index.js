@@ -9,6 +9,11 @@ class Documents extends Component {
     this.state = {
       list: [],
       visible: false,
+      editContent: {
+        author: '',
+        content: '',
+      },
+      e_index: 0,
     };
   }
 
@@ -59,14 +64,26 @@ class Documents extends Component {
   };
 
   _handClickEdit = (record, index) => {
+    const { author, content } = record;
+    const tempObj = {
+      author,
+      content,
+    };
     this.setState((state) => ({
       visible: !state.visible,
+      editContent: tempObj,
+      e_index: index,
     }));
-    console.log('编辑', record, index);
   };
 
-  _editorCallBack = (value) => {
+  _editorCallBack = (value, item) => {
+    const { e_index, list } = this.state;
+    const obj = list[e_index];
+    const tempObj = { ...obj, ...item };
+    const tempList = [...list];
+    tempList[e_index] = tempObj;
     this.setState({
+      list: tempList,
       visible: value,
     });
   };
@@ -85,6 +102,7 @@ class Documents extends Component {
 
           <EditorModal
             visible={this.state.visible}
+            editContent={this.state.editContent}
             editorCallBack={this._editorCallBack}
           />
         </div>
