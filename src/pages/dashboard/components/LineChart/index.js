@@ -39,7 +39,7 @@ class LineChart extends Component {
 
   initChart = () => {
     if (!this.el.current) return;
-    this.setState({ chart: echarts.init(this.el.current) }, () => {
+    this.setState({ chart: echarts.init(this.el.current, 'light') }, () => {
       console.log('拿到el实例');
       this.setOptions();
     });
