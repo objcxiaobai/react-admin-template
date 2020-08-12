@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Modal, Form, Input } from 'antd';
 class EditorModal extends Component {
   formRef = React.createRef();
-  constructor(props) {
-    super(props);
-  }
 
   handlerSubmit = () => {
     this.formRef.current

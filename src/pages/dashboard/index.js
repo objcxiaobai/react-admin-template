@@ -1,7 +1,11 @@
 import React from 'react';
-
+import PanelGroup from '@/pages/dashboard/components/PanelGroup';
 function Dashboard() {
-  return <h2>dashboard</h2>;
+  return (
+    <>
+      <PanelGroup />
+    </>
+  );
 }
 
 export default Dashboard;

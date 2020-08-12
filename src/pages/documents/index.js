@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Table, Space, Button } from 'antd';
+import { Table, Space, Button, Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import EditorModal from '@/components/EditorModal';
 import { getList } from '@/api/documents';
 import './index.css';
+
+const { confirm } = Modal;
+
 class Documents extends Component {
   constructor(props) {
     super(props);
@@ -55,12 +59,30 @@ class Documents extends Component {
   };
 
   _handClickDelete = (record, index) => {
-    const tempList = [...this.state.list];
-    tempList.splice(index, 1);
-    this.setState({
-      list: tempList,
+    this._showDeleteConfirm(record, index);
+  };
+
+  _showDeleteConfirm = (record, index) => {
+    const self = this;
+    confirm({
+      title: '警告!',
+      icon: <ExclamationCircleOutlined />,
+      content: '是否删除删除该条信息',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        const tempList = [...self.state.list];
+        tempList.splice(index, 1);
+        self.setState({
+          list: tempList,
+        });
+        console.log('删除', record, index);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
     });
-    console.log('删除', record, index);
   };
 
   _handClickEdit = (record, index) => {
