@@ -29,7 +29,7 @@ class Documents extends Component {
       },
       {
         title: '标题',
-        dataIndex: 'title',
+        dataIndex: 'content',
       },
       {
         title: '操作',
@@ -67,7 +67,7 @@ class Documents extends Component {
     confirm({
       title: '警告!',
       icon: <ExclamationCircleOutlined />,
-      content: '是否删除删除该条信息',
+      content: '是否删除该条信息',
       okText: '确定',
       okType: 'danger',
       cancelText: '取消',
