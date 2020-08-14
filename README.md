@@ -91,3 +91,14 @@ success:
 - add: `http-proxy-middleware` 中间件 跨域代理
 - update : http util
 - add: 在 documents 模块中 添加 tab 并网络请求
+
+### 0.0.11
+
+- 修改 documents 组件 样式
+- 在 documents 组件添加 editorModal 弹窗组件
+- 实现 documents 组件 和 editorModal 通信
+
+### 0.0.12
+
+- 在 documents 组件中 删除 action 添加 modal
+- 在 dashboard 模块中添加 PanelGroup 组件

@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
-import { Table, Space, Button } from 'antd';
+import { Table, Space, Button, Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import EditorModal from '@/components/EditorModal';
 import { getList } from '@/api/documents';
 import './index.css';
+
+const { confirm } = Modal;
+
 class Documents extends Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
+      visible: false,
+      editContent: {
+        author: '',
+        content: '',
+      },
+      e_index: 0,
     };
   }
 
@@ -18,12 +29,12 @@ class Documents extends Component {
       },
       {
         title: '标题',
-        dataIndex: 'title',
+        dataIndex: 'content',
       },
       {
         title: '操作',
         key: 'action',
-        render: (text, record, index) => {
+        render: (_, record, index) => {
           let item = record;
           let idx = index;
           return (
@@ -48,11 +59,55 @@ class Documents extends Component {
   };
 
   _handClickDelete = (record, index) => {
-    console.log('删除', record, index);
+    this._showDeleteConfirm(record, index);
+  };
+
+  _showDeleteConfirm = (record, index) => {
+    const self = this;
+    confirm({
+      title: '警告!',
+      icon: <ExclamationCircleOutlined />,
+      content: '是否删除该条信息',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        const tempList = [...self.state.list];
+        tempList.splice(index, 1);
+        self.setState({
+          list: tempList,
+        });
+        console.log('删除', record, index);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
   };
 
   _handClickEdit = (record, index) => {
-    console.log('编辑', record, index);
+    const { author, content } = record;
+    const tempObj = {
+      author,
+      content,
+    };
+    this.setState((state) => ({
+      visible: !state.visible,
+      editContent: tempObj,
+      e_index: index,
+    }));
+  };
+
+  _editorCallBack = (value, item) => {
+    const { e_index, list } = this.state;
+    const obj = list[e_index];
+    const tempObj = { ...obj, ...item };
+    const tempList = [...list];
+    tempList[e_index] = tempObj;
+    this.setState({
+      list: tempList,
+      visible: value,
+    });
   };
 
   render() {
@@ -60,14 +115,18 @@ class Documents extends Component {
 
     return (
       <>
-        <h2>大家好我是文档</h2>
-
         <div className="d-container">
           <Table
             columns={_columns}
             rowKey={(record) => record.url}
             dataSource={this.state.list}
           ></Table>
+
+          <EditorModal
+            visible={this.state.visible}
+            editContent={this.state.editContent}
+            editorCallBack={this._editorCallBack}
+          />
         </div>
       </>
     );
